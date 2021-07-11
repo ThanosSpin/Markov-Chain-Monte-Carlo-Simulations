@@ -1,6 +1,5 @@
 #### Import Libraries ###### 
 
-# install.packages("magicfor") 
 library(svMisc)# progress for loops
 library(doParallel)# parallel processing
 library(zoo)#Rolling means (moving average)
@@ -108,8 +107,6 @@ mh.d<-function(starting_point, n, k)
 {
   accept <- 0
   x <- starting_point
-  # vec <- c(x)
-  # vec[1, ] = x
   for (i in 2:n) {
       can <- (runif(k - 1, -1/(k - 1), 1/(k - 1))) + x
     sphere <- sum(can^2)
@@ -117,9 +114,6 @@ mh.d<-function(starting_point, n, k)
         x <- can 
         # vec <- x
     }
-    # else {
-    #   vec <- rbind(vec, x)
-    # }
   }
   last_step <- c((runif(1, -1, 1)))
   if (sum(last_step^2, x^2) < 1) {
@@ -129,9 +123,6 @@ mh.d<-function(starting_point, n, k)
   return(list(x, alpha, mean(x)))
 }
 
-# chain_ <- mh.d(c(rep(0, 9)), 200000, 10, 1)
-# smoothScatter(chain_)
-# lines(chain_[,1], chain_[,2], col="#00000088")
 
 
 ####MCMC function with storing the simulated values of Uniform Distribution####
@@ -158,8 +149,6 @@ mh.d_dim <-function(starting_point, n, k)
     accept <- accept + 1
     
     alpha <- accept
-    
-    #alpha
   }
   return(list(vec, alpha, mean(vec$X1)))
 }
